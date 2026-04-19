@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="service.shelly.shutdown"
+       name="Shelly Shutdown Timer"
+       version="1.0.0"
+       provider-name="Windowclaw">
+
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="xbmc.addon" version="12.0.0"/>
+    </requires>
+
+    <!-- Service extension: runs automatically when Kodi starts -->
+    <extension point="xbmc.service"
+               library="service.py"
+               start="login"/>
+
+    <!-- Metadata extension -->
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <source>https://github.com/Windowclaw/service.shelly.shutdown</source>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.png</fanart>
+        </assets>
+        <summary lang="en_GB">Triggers a Shelly Plug timer on Kodi shutdown to safely power off the system</summary>
+        <summary lang="de_DE">Startet beim Kodi-Herunterfahren einen Shelly-Plug-Timer zum sicheren Abschalten</summary>
+        <description lang="en_GB">When Kodi shuts down (e.g. via remote control), this service addon sends an HTTP request to a Shelly smart plug on your local network. The Shelly turns off its output after a configurable delay (0-300+ seconds), giving the system time to complete shutdown before power is cut. Useful to eliminate standby power consumption without risking data loss from abrupt power cuts.</description>
+        <description lang="de_DE">Beim Herunterfahren von Kodi (z. B. per Fernbedienung) sendet dieses Service-Addon einen HTTP-Request an einen Shelly Smart Plug im lokalen Netzwerk. Der Shelly schaltet den Ausgang nach einer konfigurierbaren Verzoegerung (0-300+ Sekunden) ab und gibt dem System Zeit, das Herunterfahren abzuschliessen, bevor der Strom getrennt wird.</description>
+        <disclaimer lang="en_GB">Requires a Shelly smart plug reachable on the local network. Configure the Shelly URL and timer delay in the addon settings before use.</disclaimer>
+        <disclaimer lang="de_DE">Erfordert einen im lokalen Netzwerk erreichbaren Shelly Smart Plug. Bitte Shelly-URL und Timer-Verzoegerung in den Addon-Einstellungen konfigurieren.</disclaimer>
+        <news>v1.0.0 - Initial release</news>
+    </extension>
+
+</addon>

@@ -1,0 +1,110 @@
+# Kodi Media Center language file
+# Addon Name: Shelly Shutdown Timer
+# Addon id: service.shelly.shutdown
+# Addon Provider: YourName
+msgid ""
+msgstr ""
+"Project-Id-Version: service.shelly.shutdown\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Settings categories / groups
+msgctxt "#32000"
+msgid "General"
+msgstr ""
+
+msgctxt "#32001"
+msgid "Enable Shelly Shutdown Timer"
+msgstr ""
+
+msgctxt "#32002"
+msgid "Shelly device URL (e.g. http://192.168.1.100)"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Shelly generation"
+msgstr ""
+
+msgctxt "#32004"
+msgid "Power-off delay (seconds)"
+msgstr ""
+
+msgctxt "#32010"
+msgid "Gen1 (Plug / Plug S)"
+msgstr ""
+
+msgctxt "#32011"
+msgid "Gen2 / Gen3 (Plus Plug S, Pro ...)"
+msgstr ""
+
+msgctxt "#32020"
+msgid "Advanced"
+msgstr ""
+
+msgctxt "#32021"
+msgid "HTTP request timeout (seconds)"
+msgstr ""
+
+msgctxt "#32022"
+msgid "Show on-screen notifications"
+msgstr ""
+
+# Notification / log messages
+msgctxt "#32100"
+msgid "Shelly Shutdown Timer"
+msgstr ""
+
+msgctxt "#32101"
+msgid "Shelly timer started successfully ({0}s)"
+msgstr ""
+
+msgctxt "#32102"
+msgid "Shelly timer request failed: {0}"
+msgstr ""
+
+msgctxt "#32103"
+msgid "Addon disabled – Shelly will not be triggered"
+msgstr ""
+
+msgctxt "#32104"
+msgid "No Shelly URL configured"
+msgstr ""
+
+msgctxt "#32105"
+msgid "Timer delay: {0} seconds"
+msgstr ""
+
+msgctxt "#32005"
+msgid "Auto-detect Shelly generation on shutdown"
+msgstr ""
+
+msgctxt "#32106"
+msgid "URL blocked: only local network addresses are allowed"
+msgstr ""
+
+msgctxt "#32107"
+msgid "URL validation failed: {0}"
+msgstr ""
+
+msgctxt "#32030"
+msgid "Authentication"
+msgstr ""
+
+msgctxt "#32031"
+msgid "Enable HTTP authentication"
+msgstr ""
+
+msgctxt "#32032"
+msgid "Username"
+msgstr ""
+
+msgctxt "#32033"
+msgid "Password"
+msgstr ""

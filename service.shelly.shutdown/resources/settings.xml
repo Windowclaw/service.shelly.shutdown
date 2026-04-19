@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+
+    <category label="32000">
+
+        <setting id="addon_enabled"
+                 type="bool"
+                 label="32001"
+                 default="true"/>
+
+        <setting type="sep"/>
+
+        <setting id="shelly_url"
+                 type="text"
+                 label="32002"
+                 default="http://192.168.1.100"/>
+
+        <setting id="auto_detect_gen"
+                 type="bool"
+                 label="32005"
+                 default="false"/>
+
+        <setting id="shelly_gen"
+                 type="enum"
+                 label="32003"
+                 default="0"
+                 lvalues="32010|32011"
+                 enable="eq(auto_detect_gen,false)"/>
+
+        <setting id="timer_seconds"
+                 type="slider"
+                 label="32004"
+                 default="60"
+                 range="0,5,600"
+                 option="int"/>
+
+    </category>
+
+    <category label="32030">
+
+        <setting id="auth_enabled"
+                 type="bool"
+                 label="32031"
+                 default="false"/>
+
+        <setting id="auth_username"
+                 type="text"
+                 label="32032"
+                 default="admin"
+                 enable="eq(auth_enabled,true)"/>
+
+        <setting id="auth_password"
+                 type="text"
+                 label="32033"
+                 default=""
+                 option="hidden"
+                 enable="eq(auth_enabled,true)"/>
+
+    </category>
+
+    <category label="32020">
+
+        <setting id="request_timeout"
+                 type="slider"
+                 label="32021"
+                 default="5"
+                 range="1,1,30"
+                 option="int"/>
+
+        <setting id="show_notifications"
+                 type="bool"
+                 label="32022"
+                 default="true"/>
+
+    </category>
+
+</settings>

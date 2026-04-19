@@ -1,0 +1,9 @@
+v1.0.0 (2025-01-01)
+- Initial release
+- Service addon hooks into Kodi shutdown via xbmc.Monitor.onAbortRequested()
+- Supports Shelly Gen1 (Plug, Plug S) via /relay/0?turn=on&timer=<s>
+- Supports Shelly Gen2/Gen3 (Plus Plug S, Pro) via /rpc/Switch.Set toggle_after
+- Configurable: enable/disable, Shelly URL, generation, timer delay (0-600s)
+- Configurable: HTTP timeout, OSD notifications
+- Full i18n: English and German
+- Hardware-independent: runs on Raspberry Pi, x86, ARM, any Kodi platform

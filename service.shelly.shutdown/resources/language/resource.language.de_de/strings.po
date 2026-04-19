@@ -1,0 +1,110 @@
+# Kodi Media Center language file
+# Addon Name: Shelly Shutdown Timer
+# Addon id: service.shelly.shutdown
+# Addon Provider: YourName
+msgid ""
+msgstr ""
+"Project-Id-Version: service.shelly.shutdown\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 00:00+0000\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+# Einstellungskategorien / Gruppen
+msgctxt "#32000"
+msgid "General"
+msgstr "Allgemein"
+
+msgctxt "#32001"
+msgid "Enable Shelly Shutdown Timer"
+msgstr "Shelly Abschalt-Timer aktivieren"
+
+msgctxt "#32002"
+msgid "Shelly device URL (e.g. http://192.168.1.100)"
+msgstr "Shelly-Geräte-URL (z. B. http://192.168.1.100)"
+
+msgctxt "#32003"
+msgid "Shelly generation"
+msgstr "Shelly-Generation"
+
+msgctxt "#32004"
+msgid "Power-off delay (seconds)"
+msgstr "Abschaltverzögerung (Sekunden)"
+
+msgctxt "#32010"
+msgid "Gen1 (Plug / Plug S)"
+msgstr "Gen1 (Plug / Plug S)"
+
+msgctxt "#32011"
+msgid "Gen2 / Gen3 (Plus Plug S, Pro ...)"
+msgstr "Gen2 / Gen3 (Plus Plug S, Pro …)"
+
+msgctxt "#32020"
+msgid "Advanced"
+msgstr "Erweitert"
+
+msgctxt "#32021"
+msgid "HTTP request timeout (seconds)"
+msgstr "HTTP-Anfrage-Timeout (Sekunden)"
+
+msgctxt "#32022"
+msgid "Show on-screen notifications"
+msgstr "Bildschirmbenachrichtigungen anzeigen"
+
+# Benachrichtigungs- / Log-Nachrichten
+msgctxt "#32100"
+msgid "Shelly Shutdown Timer"
+msgstr "Shelly Abschalt-Timer"
+
+msgctxt "#32101"
+msgid "Shelly timer started successfully ({0}s)"
+msgstr "Shelly-Timer erfolgreich gestartet ({0} s)"
+
+msgctxt "#32102"
+msgid "Shelly timer request failed: {0}"
+msgstr "Shelly-Timer-Anfrage fehlgeschlagen: {0}"
+
+msgctxt "#32103"
+msgid "Addon disabled – Shelly will not be triggered"
+msgstr "Addon deaktiviert – Shelly wird nicht ausgelöst"
+
+msgctxt "#32104"
+msgid "No Shelly URL configured"
+msgstr "Keine Shelly-URL konfiguriert"
+
+msgctxt "#32105"
+msgid "Timer delay: {0} seconds"
+msgstr "Timer-Verzögerung: {0} Sekunden"
+
+msgctxt "#32005"
+msgid "Auto-detect Shelly generation on shutdown"
+msgstr "Shelly-Generation beim Herunterfahren automatisch erkennen"
+
+msgctxt "#32106"
+msgid "URL blocked: only local network addresses are allowed"
+msgstr "URL blockiert: nur lokale Netzwerkadressen sind erlaubt"
+
+msgctxt "#32107"
+msgid "URL validation failed: {0}"
+msgstr "URL-Validierung fehlgeschlagen: {0}"
+
+msgctxt "#32030"
+msgid "Authentication"
+msgstr "Authentifizierung"
+
+msgctxt "#32031"
+msgid "Enable HTTP authentication"
+msgstr "HTTP-Authentifizierung aktivieren"
+
+msgctxt "#32032"
+msgid "Username"
+msgstr "Benutzername"
+
+msgctxt "#32033"
+msgid "Password"
+msgstr "Passwort"

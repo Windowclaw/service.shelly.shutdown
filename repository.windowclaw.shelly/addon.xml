@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.windowclaw.shelly"
+       name="Windowclaw Shelly Repository"
+       version="1.0.0"
+       provider-name="Windowclaw">
+
+    <requires>
+        <import addon="xbmc.addon" version="12.0.0"/>
+    </requires>
+
+    <extension point="xbmc.addon.repository"
+               name="Windowclaw Shelly Repository">
+        <dir>
+            <info compressed="false">https://windowclaw.github.io/service.shelly.shutdown/addons.xml</info>
+            <checksum>https://windowclaw.github.io/service.shelly.shutdown/addons.xml.md5</checksum>
+            <datadir zip="true">https://windowclaw.github.io/service.shelly.shutdown/</datadir>
+            <hashes>md5</hashes>
+        </dir>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+        <platform>all</platform>
+        <license>GPL-2.0-or-later</license>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+        <summary lang="en_GB">Windowclaw repository providing the Shelly Shutdown Timer addon</summary>
+        <summary lang="de_DE">Windowclaw-Repository mit dem Shelly-Abschalt-Timer-Addon</summary>
+        <description lang="en_GB">Provides the Shelly Shutdown Timer service addon, which triggers a Shelly smart plug timer on Kodi shutdown for safe poweroff without standby consumption.</description>
+        <description lang="de_DE">Stellt das Shelly-Abschalt-Timer-Addon bereit, das beim Kodi-Herunterfahren einen Shelly-Smart-Plug-Timer ausloest.</description>
+    </extension>
+
+</addon>
