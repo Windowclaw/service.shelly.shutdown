@@ -182,3 +182,4 @@ The CI pipeline automatically:
 ## License
 
 GPL-2.0-or-later — see [LICENSE.txt](service.shelly.shutdown/LICENSE.txt)
+# service.shelly.shutdown
