@@ -97,7 +97,12 @@ def validate_shelly_url(url):
          appear in log output. Credentials must be supplied separately.
       3. Host must resolve to a private/link-local IPv4 address (SSRF guard).
 
-    Returns the stripped, normalised URL (trailing slash removed).
+    Returns a dict with:
+      - 'url': Original hostname-based URL (for user reference)
+      - 'ip_url': IP-based URL (for actual HTTP requests - DNS rebinding mitigation)
+      - 'hostname': Resolved hostname
+      - 'ip': Resolved IPv4 address as string
+    
     Raises ShellyURLError on any violation.
     """
     url = url.strip().rstrip("/")
@@ -131,8 +136,17 @@ def validate_shelly_url(url):
             "Only devices on the local network are permitted.".format(host, ip_str)
         )
 
-    _log("URL validated: {} -> {}".format(url, ip_str), xbmc.LOGDEBUG)
-    return url
+    # Build IP-based URL for actual requests (prevents DNS rebinding attacks)
+    ip_url = "{}://{}".format(parsed.scheme, ip_str)
+    
+    _log("✓ URL validated: {} -> {} (will use IP-based URL for requests)".format(url, ip_str), xbmc.LOGINFO)
+    
+    return {
+        "url": url,
+        "ip_url": ip_url,
+        "hostname": host,
+        "ip": ip_str,
+    }
 
 
 # ---------------------------------------------------------------------------

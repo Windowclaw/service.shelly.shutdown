@@ -262,7 +262,8 @@ def _execute_shelly_timer(settings: dict) -> None:
     # --- URL validation (SSRF guard) ---
     raw_url = settings["shelly_url"]
     try:
-        url = validate_shelly_url(raw_url)
+        url_info = validate_shelly_url(raw_url)
+        url = url_info["ip_url"]  # Use IP-based URL (DNS rebinding mitigation)
     except ShellyURLError as exc:
         _log("URL validation failed: {}".format(exc), xbmc.LOGERROR)
         _notify(ADDON.getLocalizedString(32104))
@@ -309,6 +310,13 @@ def _execute_shelly_timer(settings: dict) -> None:
     except ValueError as exc:
         _log("Configuration error: {}".format(exc), xbmc.LOGERROR)
         _notify(ADDON.getLocalizedString(32102).format(str(exc)))
+
+    finally:
+        # Clear credentials from memory immediately after use (security: prevent memory exposure)
+        if settings["auth_enabled"]:
+            settings["auth_password"] = ""
+            settings["auth_username"] = ""
+            _log("✓ Credentials cleared from memory", xbmc.LOGDEBUG)
 
 
 # ---------------------------------------------------------------------------

@@ -45,6 +45,12 @@ This addon stores credentials in Kodi's settings file:
 - Anyone with file system access to your Kodi device can read them
 - On Raspberry Pi with physical access: credentials are trivial to extract
 
+### Memory Management (v1.0.0+)
+**IMPROVED:** Credentials are **cleared from memory immediately after use**
+- After successful/failed HTTP request, password and username are set to empty strings
+- Prevents memory dump attacks during the 5-second shutdown window
+- Logged at DEBUG level for verification
+
 ### Recommendations
 - Only run this addon on **secured, trusted devices**
 - Use strong passwords for your Kodi OS user
@@ -53,7 +59,24 @@ This addon stores credentials in Kodi's settings file:
 
 ---
 
-## 🌐 Local Network Only (SSRF Protection)
+## 🛡️ Implemented Hardening Features (v1.0.0+)
+
+### DNS Rebinding Protection
+**FIXED:** URL hostname resolution occurs at validation time, and all HTTP requests use the resolved IP address instead of the hostname. This prevents DNS rebinding attacks where an attacker on the LAN could change DNS records between validation and the actual request.
+
+**How it works:**
+1. User enters: `http://shelly.local`
+2. Validation resolves to: `192.168.1.100`
+3. Requests use: `http://192.168.1.100` (IP, not hostname)
+4. Even if DNS record changed → Request still goes to validated IP
+
+### Credential Memory Clearing
+**IMPROVED:** Credentials are explicitly cleared from memory after each shutdown event:
+- Password and username fields set to empty strings
+- Happens in `finally` block (guaranteed execution)
+- Prevents memory dump attacks during 5-second shutdown window
+
+---
 
 This addon enforces strict access control:
 
