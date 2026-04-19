@@ -1,6 +1,9 @@
 """
 shelly_client.py  -  Shelly HTTP API abstraction
 =================================================
+Copyright (C) 2026 Windowclaw
+Licensed under GPL-2.0-or-later (see LICENSE.txt)
+
 Supports:
   Gen1 (Plug, Plug S, 1, 2, ...)      -> /relay/0?turn=on&timer=<s>
   Gen2 / Gen3 (Plus Plug S, Pro, ...) -> /rpc/Switch.Set?id=0&on=true&toggle_after=<s>

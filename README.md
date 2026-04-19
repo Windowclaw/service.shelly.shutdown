@@ -14,6 +14,11 @@ shutdown before the socket goes off.
 remote triggers a clean shutdown, then the Shelly cuts the power after e.g.
 30–60 seconds. No more standby consumption, no more unsafe power cuts.
 
+> ⚠️ **Security Notice:** This addon currently uses HTTP (not HTTPS) to communicate
+> with Shelly devices. Credentials transmitted via HTTP are **not encrypted**.
+> **Only use this addon on trusted, closed networks.**
+> For detailed security information, see [SECURITY.md](./SECURITY.md)
+
 ---
 
 ## Features

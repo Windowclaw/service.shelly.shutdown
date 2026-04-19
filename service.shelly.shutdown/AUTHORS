@@ -1,0 +1,15 @@
+Shelly Shutdown Timer - Kodi Service Addon
+https://github.com/Windowclaw/service.shelly.shutdown
+
+Contributors
+=============
+
+Windowclaw
+  - Initial development
+  - Architecture and design
+  - Python implementation
+  - Localization (English, German)
+
+For reporting issues or submitting contributions, please visit:
+https://github.com/Windowclaw/service.shelly.shutdown/issues
+https://github.com/Windowclaw/service.shelly.shutdown/pulls

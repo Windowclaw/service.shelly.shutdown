@@ -1,6 +1,9 @@
 """
 service.py  –  Shelly Shutdown Timer  (Kodi Service Add-on)
 ============================================================
+Copyright (C) 2026 Windowclaw
+Licensed under GPL-2.0-or-later (see LICENSE.txt)
+
 Entry point for the xbmc.service extension point.
 
 Use Case
