@@ -187,8 +187,7 @@ class ShellyShutdownMonitor(xbmc.Monitor):
 
     def onSettingsChanged(self) -> None:  # noqa: N802  (Kodi API name)
         """Called by Kodi whenever the user saves changes in the addon settings UI.
-        Settings are intentionally re-read at shutdown time (not cached here),
-        so no action is needed – we just confirm the change in the log.
+        This is where we handle dependency refreshes for conditional settings.
         """
         try:
             s = _read_settings()
@@ -199,6 +198,12 @@ class ShellyShutdownMonitor(xbmc.Monitor):
                 ),
                 xbmc.LOGINFO,
             )
+            
+            # Kodi 21+ bug: enable="" conditions don't refresh after toggle changes.
+            # Workaround: Force a settings re-evaluation by opening and closing the dialog.
+            # This ensures conditional fields (user/password, shelly_gen) are properly enabled/disabled.
+            _trigger_settings_refresh()
+            
         except RuntimeError:
             _log("Settings change event received but addon not available", xbmc.LOGWARNING)
 
@@ -272,6 +277,10 @@ def _execute_shelly_timer(settings: dict) -> None:
     timer_s = settings["timer_seconds"]
     gen     = settings["shelly_gen"]
     timeout = settings["request_timeout"]
+    
+    # During shutdown, cap timeout to ensure Kodi doesn't kill us (it allows ~5s)
+    # Use max 3 seconds to stay well within the safety window
+    shutdown_timeout = min(3, timeout)
 
     # --- Credentials (never logged) ---
     username = settings["auth_username"] if settings["auth_enabled"] else None
@@ -280,7 +289,10 @@ def _execute_shelly_timer(settings: dict) -> None:
     # --- Optional auto-detection of Shelly generation ---
     if settings.get("auto_detect_gen"):
         _log("Auto-detecting Shelly generation ...", xbmc.LOGINFO)
-        gen = detect_generation(url, timeout=timeout,
+        # Use SHORT timeout for auto-detection during shutdown (Kodi only gives ~5s total)
+        # Fallback to Gen1 on timeout/error is handled inside detect_generation()
+        autodetect_timeout = min(2, shutdown_timeout)  # Max 2 seconds for probe
+        gen = detect_generation(url, timeout=autodetect_timeout,
                                 username=username, password=password)
         _log("Auto-detected gen={}".format(gen), xbmc.LOGINFO)
 
@@ -295,7 +307,7 @@ def _execute_shelly_timer(settings: dict) -> None:
             base_url=url,
             timer_seconds=timer_s,
             shelly_gen=gen,
-            timeout=timeout,
+            timeout=shutdown_timeout,  # ← Use capped timeout during shutdown
             username=username,
             password=password,
         )
