@@ -80,6 +80,14 @@ ADDON_NAME = ADDON.getAddonInfo("name")
 # Flag to track if a reboot action was detected (set by onAction callback)
 _reboot_action_detected = False
 
+# Cache previous toggle state to detect changes (for settings refresh workaround)
+# Set to False initially so first change detection works properly
+_last_toggle_state = {
+    "auth_enabled": False,
+    "auto_detect_gen": False,
+    "_initialized": False,  # Flag to track if we've initialized the state
+}
+
 
 # ---------------------------------------------------------------------------
 # Logging helpers
@@ -106,6 +114,53 @@ def _notify(message: str) -> None:
 # ---------------------------------------------------------------------------
 # Settings helpers
 # ---------------------------------------------------------------------------
+def _trigger_settings_refresh() -> None:
+    """
+    Workaround for Kodi 21+ bug: enable="" conditions in settings.xml are not
+    dynamically re-evaluated when boolean settings change.
+    
+    Smart approach: Only refresh if a toggle-field (auth_enabled, auto_detect_gen)
+    has changed. This avoids annoying dialog re-opens when other settings change.
+    First call initializes the state without triggering a refresh.
+    
+    Solution: Re-open the settings dialog immediately after saving.
+    This causes settings.xml to be re-parsed and all enable conditions to be
+    re-evaluated. User will see the conditional fields (username/password,
+    shelly_gen) become enabled/disabled based on their toggle selections.
+    """
+    global _last_toggle_state
+    
+    try:
+        current_auth = ADDON.getSetting("auth_enabled").lower() == "true"
+        current_auto_detect = ADDON.getSetting("auto_detect_gen").lower() == "true"
+        
+        # First initialization: just store the state, don't refresh yet
+        if not _last_toggle_state["_initialized"]:
+            _last_toggle_state["auth_enabled"] = current_auth
+            _last_toggle_state["auto_detect_gen"] = current_auto_detect
+            _last_toggle_state["_initialized"] = True
+            _log("Settings cache initialized (auth={}, autodetect={})".format(
+                current_auth, current_auto_detect), xbmc.LOGDEBUG)
+            return
+        
+        # Check if any toggle changed
+        auth_changed = _last_toggle_state["auth_enabled"] != current_auth
+        autodetect_changed = _last_toggle_state["auto_detect_gen"] != current_auto_detect
+        
+        # Update cache
+        _last_toggle_state["auth_enabled"] = current_auth
+        _last_toggle_state["auto_detect_gen"] = current_auto_detect
+        
+        # Only refresh if a toggle actually changed
+        if auth_changed or autodetect_changed:
+            _log("Toggle field changed (auth={}, autodetect={}) - refreshing settings UI".format(
+                auth_changed, autodetect_changed), xbmc.LOGINFO)
+            ADDON.openSettings()
+        
+    except Exception as exc:
+        _log("Could not trigger settings refresh: {}".format(exc), xbmc.LOGWARNING)
+
+
 def _read_settings() -> dict:
     """Read all relevant settings and return as a plain dict.
 

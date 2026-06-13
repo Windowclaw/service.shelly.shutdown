@@ -1,3 +1,13 @@
+v2.0.0 (2026-05-21)
+- BREAKING CHANGE: Addon now triggers via Power button on remote control (remote.xml) instead of automatic shutdown
+- Removed xbmc.service extension - addon is now config+script only
+- Added shelly_timer_cli.py - standalone script for remote.xml integration
+- Modified behavior: Shelly timer only triggers when Power button is explicitly pressed
+- Added comprehensive INSTALLATION.md documentation for remote.xml setup
+- Enhanced security: still includes SSRF protection and auth credential handling
+- All configuration options remain unchanged
+- Full backward compatibility with existing Shelly configurations
+
 v1.0.0 (2025-01-01)
 - Initial release
 - Service addon hooks into Kodi shutdown via xbmc.Monitor.onAbortRequested()

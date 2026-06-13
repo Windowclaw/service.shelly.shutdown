@@ -1,11 +1,11 @@
-# Shelly Shutdown Timer — Kodi Service Addon
+# Shelly Shutdown Timer — Kodi Remote Control Integration
 
 [![CI](https://github.com/Windowclaw/service.shelly.shutdown/actions/workflows/ci.yml/badge.svg)](https://github.com/Windowclaw/service.shelly.shutdown/actions/workflows/ci.yml)
 ![Kodi 19+](https://img.shields.io/badge/Kodi-19%2B-blue)
 ![Python 3](https://img.shields.io/badge/Python-3-blue)
 ![License](https://img.shields.io/badge/License-GPL--2.0--or--later-green)
 
-When Kodi shuts down (e.g. via remote control), this service addon sends an
+When you press the **Power button on your remote control**, this addon sends an
 HTTP request to a **Shelly smart plug** on your local network. The Shelly
 cuts power after a configurable delay — giving the system time to complete
 shutdown before the socket goes off.
@@ -23,15 +23,27 @@ remote triggers a clean shutdown, then the Shelly cuts the power after e.g.
 
 ## Features
 
+- **Remote control integration** — triggered by Power button press (via custom remote.xml keymap)
 - Works with **Shelly Gen1** (Plug, Plug S, 1, 2 ...) and **Gen2/3** (Plus Plug S, Pro ...)
 - **Auto-detection** of Shelly generation via `/shelly` probe
 - Configurable **power-off delay** (0–600 seconds)
 - Optional **HTTP Basic Auth** (username + password, never logged)
 - **SSRF protection**: only private/local network addresses accepted
 - **Retry logic**: one automatic retry on transient network errors
-- Full **Kodi UI configuration** — no file editing required
+- Full **Kodi UI configuration** — no file editing required (except remote.xml)
 - Bilingual: **English and German**
 - Hardware-independent: runs on any platform Kodi supports
+
+---
+
+## Quick Start
+
+1. **Install this addon** (see [Installation](#installation) below)
+2. **Configure the addon settings** in Kodi (Shelly URL, timer delay, etc.)
+3. **Restart Kodi** — remote.xml keymap is installed automatically
+4. **Press Power button** on your remote — Shelly timer will activate!
+
+For detailed setup instructions, see [INSTALLATION.md](./service.shelly.shutdown/INSTALLATION.md).
 
 ---
 
@@ -66,33 +78,39 @@ The repository addon points to GitHub Pages and supports **automatic updates**.
 
 ## Configuration
 
+### Step 1: Addon Settings
+
 Open the addon settings in Kodi:
 *Settings → Addons → My addons → Services → Shelly Shutdown Timer → Configure*
 
-### General
+| Setting | Description |
+|---|---|
+| **Enable addon** | Master on/off switch |
+| **Shelly device URL** | Base URL of your Shelly, e.g. `http://192.168.1.100` or `http://shellyplug-s.fritz.box` |
+| **Auto-detect generation** | Probe the Shelly to auto-detect Gen1/Gen2 |
+| **Shelly generation** | Manual selection (Gen1 or Gen2/3); used if auto-detect is off |
+| **Power-off delay** | Seconds between Power button press and Shelly cutting power (0–600 s) |
+| **HTTP request timeout** | How long to wait for the Shelly to respond (1–30 s) |
+| **Show notifications** | Display OSD confirmation/error when Power button is pressed |
+
+### Authentication (if needed)
 
 | Setting | Description |
 |---|---|
-| Enable addon | Master on/off switch |
-| Shelly device URL | Base URL of your Shelly, e.g. `http://192.168.1.100` or `http://shellyplug-s.fritz.box` |
-| Auto-detect generation | Probe the Shelly at shutdown to determine Gen1/Gen2 automatically |
-| Shelly generation | Manual selection (Gen1 or Gen2/3); greyed out when auto-detect is on |
-| Power-off delay | Seconds between Kodi shutdown and Shelly cutting power (0–600 s) |
+| **Enable HTTP authentication** | Enable if your Shelly has "Restrict Login" enabled |
+| **Username** | HTTP Basic Auth username (default: `admin`) |
+| **Password** | HTTP Basic Auth password (masked in UI, never written to logs) |
 
-### Authentication
+### Step 2: Automatic Remote Control Keymap Setup
 
-| Setting | Description |
-|---|---|
-| Enable HTTP authentication | Activate if your Shelly has "Restrict Login" enabled |
-| Username | HTTP Basic Auth username (default: `admin`) |
-| Password | HTTP Basic Auth password (masked in UI, never written to logs) |
+When you **install the addon**, the `install_keymap.py` script is automatically executed:
 
-### Advanced
+- ✅ Creates `~/.kodi/userdata/keymaps/remote.xml` (if it doesn't exist)
+- ✅ Maps Power button to the Shelly timer script
+- ✅ Protects existing keymaps from being overwritten
+- ✅ Generates a minimal, clean remote.xml with only the Power override
 
-| Setting | Description |
-|---|---|
-| HTTP request timeout | How long to wait for the Shelly to respond (1–30 s) |
-| Show notifications | Display OSD confirmation/error after the request |
+**No manual editing required!** Just install and restart Kodi.
 
 ---
 

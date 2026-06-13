@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="service.shelly.shutdown"
        name="Shelly Shutdown Timer"
-       version="1.0.0"
+       version="2.0.0"
        provider-name="Windowclaw">
 
     <requires>
@@ -9,10 +9,11 @@
         <import addon="xbmc.addon" version="12.0.0"/>
     </requires>
 
-    <!-- Service extension: runs automatically when Kodi starts -->
-    <extension point="xbmc.service"
-               library="service.py"
-               start="login"/>
+    <!-- Executable script for installing remote keymap (called during addon install) -->
+    <extension point="xbmc.python.script"
+               library="install_keymap.py">
+        <provides>executable</provides>
+    </extension>
 
     <!-- Metadata extension -->
     <extension point="xbmc.addon.metadata">
@@ -23,13 +24,14 @@
             <icon>icon.png</icon>
             <fanart>fanart.png</fanart>
         </assets>
-        <summary lang="en_GB">Triggers a Shelly Plug timer on Kodi shutdown to safely power off the system</summary>
-        <summary lang="de_DE">Startet beim Kodi-Herunterfahren einen Shelly-Plug-Timer zum sicheren Abschalten</summary>
-        <description lang="en_GB">When Kodi shuts down (e.g. via remote control), this service addon sends an HTTP request to a Shelly smart plug on your local network. The Shelly turns off its output after a configurable delay (0-300+ seconds), giving the system time to complete shutdown before power is cut. Useful to eliminate standby power consumption without risking data loss from abrupt power cuts.</description>
-        <description lang="de_DE">Beim Herunterfahren von Kodi (z. B. per Fernbedienung) sendet dieses Service-Addon einen HTTP-Request an einen Shelly Smart Plug im lokalen Netzwerk. Der Shelly schaltet den Ausgang nach einer konfigurierbaren Verzoegerung (0-300+ Sekunden) ab und gibt dem System Zeit, das Herunterfahren abzuschliessen, bevor der Strom getrennt wird.</description>
-        <disclaimer lang="en_GB">Requires a Shelly smart plug reachable on the local network. Configure the Shelly URL and timer delay in the addon settings before use.</disclaimer>
-        <disclaimer lang="de_DE">Erfordert einen im lokalen Netzwerk erreichbaren Shelly Smart Plug. Bitte Shelly-URL und Timer-Verzoegerung in den Addon-Einstellungen konfigurieren.</disclaimer>
-        <news>v1.0.0 - Initial release</news>
+        <summary lang="en_GB">Triggers a Shelly Plug timer when you press the power button on your remote control</summary>
+        <summary lang="de_DE">Startet einen Shelly-Plug-Timer, wenn Sie die Aus-Taste auf der Fernbedienung drücken</summary>
+        <description lang="en_GB">Configure this addon and add a custom remote.xml keymap to trigger a Shelly smart plug timer when the power button is pressed. The Shelly will turn off its output after a configurable delay (0-300+ seconds), safely powering down your system while giving it time to complete shutdown before power is cut. This eliminates standby power consumption without risking data loss.</description>
+        <description lang="de_DE">Konfigurieren Sie dieses Addon und fügen Sie eine benutzerdefinierte remote.xml Keymap hinzu, um einen Shelly Smart Plug Timer auszulösen, wenn die Aus-Taste gedrückt wird. Der Shelly schaltet den Ausgang nach einer konfigurierbaren Verzögerung (0-300+ Sekunden) ab und fahrt das System sicher herunter, während die Zeit zum Abschluss des Herunterfahrens bleibt, bevor der Strom getrennt wird.</description>
+        <disclaimer lang="en_GB">Requires a Shelly smart plug reachable on the local network. Configure the Shelly URL, timer delay, and remote.xml keymap in the addon settings before use.</disclaimer>
+        <disclaimer lang="de_DE">Erfordert einen im lokalen Netzwerk erreichbaren Shelly Smart Plug. Konfigurieren Sie Shelly-URL, Timer-Verzögerung und remote.xml Keymap in den Addon-Einstellungen.</disclaimer>
+        <news>v2.0.0 - Switched to Power button trigger via remote.xml (no longer automatic shutdown service)
+v1.0.0 - Initial release</news>
     </extension>
 
 </addon>
